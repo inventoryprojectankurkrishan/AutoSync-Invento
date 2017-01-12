@@ -14,12 +14,7 @@ public class LoginAC implements Action
 	private String message;
 	private UserDTO userDTOObject;
 	
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
+	
 	public String getUserid() {
 		return userid;
 	}
@@ -33,6 +28,20 @@ public class LoginAC implements Action
 	{
 		this.password = password;
 	}
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public UserDTO getUserDTOObject() {
+		return userDTOObject;
+	}
+	public void setUserDTOObject(UserDTO userDTOObject) {
+		this.userDTOObject = userDTOObject;
+	}
+	
 	public String doLogin() throws ClassNotFoundException, SQLException{
 		String result = ERROR;
 		if(isValid()){
@@ -55,12 +64,7 @@ public class LoginAC implements Action
 		}
 		return result;
 	}
-	public UserDTO getUserDTOObject() {
-		return userDTOObject;
-	}
-	public void setUserDTOObject(UserDTO userDTOObject) {
-		this.userDTOObject = userDTOObject;
-	}
+	
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub

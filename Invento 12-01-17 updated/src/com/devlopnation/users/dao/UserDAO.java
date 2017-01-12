@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import com.devlopnation.common.dao.CommonDAO;
 import com.devlopnation.common.dao.CommonSQL;
+import com.devlopnation.users.dto.NameDTO;
 import com.devlopnation.users.dto.RightDTO;
 import com.devlopnation.users.dto.RoleDTO;
 import com.devlopnation.users.dto.UserDTO;
@@ -21,6 +22,7 @@ public class UserDAO {
 		RoleDTO roleDTO = null;
 		LinkedHashMap<String, ArrayList<RightDTO>> groupMap = new LinkedHashMap<>();
 		ArrayList<RightDTO> rightList = new ArrayList<RightDTO>();
+		NameDTO nameDTO = null;
 		try
 			{	
 			String tempGroupName="";
@@ -37,7 +39,15 @@ public class UserDAO {
 					if(userDTOObject==null)
 					{	userDTOObject= new UserDTO();
 						userDTOObject.setUserid(rs.getString("userid"));
-						
+					}
+							
+					if(nameDTO==null)	
+					{	
+						nameDTO=new NameDTO();
+						nameDTO.setSalutation(rs.getString("salutation"));
+						nameDTO.setFirstName(rs.getString("firstname"));
+						nameDTO.setMiddlename(rs.getString("middlename"));
+						nameDTO.setLastname(rs.getString("lastname"));
 					}
 					if(roleDTO==null)
 					{
@@ -46,17 +56,19 @@ public class UserDAO {
 						roleDTO.setDescr(rs.getString("roledescr"));
 					}
 				}
+				
 				if(!(tempGroupName.equals(rs.getString("groupname"))))
-						{
-							groupMap.put(tempGroupName, rightList);
-							rightList=new ArrayList <RightDTO>();
-							tempGroupName=rs.getString("groupname");
-						}
+				{
+					groupMap.put(tempGroupName, rightList);
+					rightList=new ArrayList <RightDTO>();
+					tempGroupName=rs.getString("groupname");
+				}
 				RightDTO rightDTO = new RightDTO();
 				rightDTO.setName(rs.getString("name"));
 				rightDTO.setDescr(rs.getString("descr"));
 				rightDTO.setUrl(rs.getString("screenname"));
 				rightList.add(rightDTO);
+				
 				if(rs.isLast())
 				{
 					groupMap.put(tempGroupName, rightList);
@@ -70,9 +82,9 @@ public class UserDAO {
 					if(groupMap!=null && groupMap.size()>0)
 					{
 						roleDTO.setGroupMap(groupMap);
-						if(rightList!=null && rightList.size()>0)
+						if(nameDTO!=null)
 						{
-							
+							userDTOObject.setName(nameDTO);
 						}
 					}
 				}

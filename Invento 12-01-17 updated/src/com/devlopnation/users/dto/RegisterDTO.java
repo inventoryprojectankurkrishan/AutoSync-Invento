@@ -4,17 +4,17 @@ public class RegisterDTO {
 	
 	private String userid ;
 	private String password;
+
 	private NameDTO name;
 	private String message ;
 
-	
+
 	public String getUserid() {
 		return userid;
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	
 	public String getPassword() {
 		return password;
 	}
@@ -32,5 +32,10 @@ public class RegisterDTO {
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	@Override
+	public String toString() {
+		return "RegisterDTO [userid=" + userid + ", password=" + password + ", name=" + name + ", message=" + message
+				+ "]";
 	}
 }

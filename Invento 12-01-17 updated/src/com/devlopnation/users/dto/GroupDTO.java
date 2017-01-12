@@ -9,7 +9,6 @@ public class GroupDTO {
 	
 	private ArrayList<RightDTO> rightList;
 	
-	
 	public String getName() {
 		return name;
 	}
@@ -28,6 +27,10 @@ public class GroupDTO {
 	}
 	public void setRightList(ArrayList<RightDTO> rightList) {
 		this.rightList = rightList;
+	}
+	@Override
+	public String toString() {
+		return "GroupDTO [name=" + name + ", descr=" + descr + ", rightList=" + rightList + "]";
 	}
 	
 }
